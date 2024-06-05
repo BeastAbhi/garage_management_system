@@ -13,7 +13,7 @@ const CarSchema = new Schema({
         required: true
     },
     ownerMobNumber:{
-        type: Sting,
+        type: String,
         required: true
     },
     carModel:{
@@ -26,5 +26,5 @@ const CarSchema = new Schema({
     }
 })
 
-const Car = mongoose.model('car', CarSchema);
-module.exports = Car
+const Cars = mongoose.model('cars', CarSchema);
+module.exports = Cars

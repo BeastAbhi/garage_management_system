@@ -11,6 +11,9 @@ app.use(express.json()); // To handle JSON-encoded data
 //This is the authintication rout
 app.use('/api/auth', require('./routes/auth'))
 
+app.use('/api/cars', require('./routes/cars'))
+
+
 
 
 app.listen(port, () => {

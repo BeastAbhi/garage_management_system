@@ -14,7 +14,7 @@ router.post(
   "/signup",
   [
     body("name", "Name should be at least 3 characters").isLength({ min: 3 }),
-    body("phoneNo", "Invalid phone Number").isLength({ min: 10 }),
+    body("phoneNo", "Invalid phone Number").isLength({ min: 10, max:10 }),
     body("password", "Password must be at leat 6 characters").isLength({
       min: 8,
     }),
