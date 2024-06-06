@@ -12,7 +12,7 @@ router.post("/fetchallcars", fetchuser, async (req, res) => {
     res.send({ posts, success: true });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send({ res: [], success: false });
+    res.status(500).send({ res: "Oops Something went wrong!", success: false });
   }
 });
 
@@ -114,10 +114,10 @@ router.delete("/deletecar/:id", fetchuser, async (req, res) => {
 
 
 //Rout 5: GET a specific car: POST "/api/posts/getcar" Login require
-router.post("/getcar/:id", fetchuser, async (req, res) => {
+router.post("/getcar", fetchuser, async (req, res) => {
     try {
       //This will fetch all the posts
-      const car = await Cars.findById(req.params.id);
+      const car = await Cars.find({carNumber: req.body.carNumber});
       res.send({car, success: true});
     } catch (error) {
       console.error(error.message);

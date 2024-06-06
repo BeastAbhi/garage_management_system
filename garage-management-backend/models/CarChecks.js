@@ -40,8 +40,12 @@ const CarChecksSchema = new Schema({
     technician:{
         type: String
     },
-    advisoryl:{
+    advisory:{
         type: String
+    },
+    date:{
+        type: Date,
+        default: Date.now
     }
 })
 
