@@ -43,7 +43,7 @@ router.post(
         carNumber,
         items,
         totalAmount,
-        isPaid: false
+        isPaid: false,
       });
       const savebill = await bill.save();
       res.send({ savebill, success: true });
@@ -59,11 +59,17 @@ router.post(
 //Rout 3: update the bill: PUT "/api/bill/updatebill" Login require
 //:id is for taking the specific id of an post which we want to edit
 router.put("/updatebill/:id", fetchuser, async (req, res) => {
-    const { items } = req.body;
+    const { items, isPaid, totalAmount } = req.body;
     try {
       const newBill = {};
       if (items) {
         newBill.items = items;
+      }
+      if(isPaid){
+        newBill.isPaid = isPaid
+      }
+      if(totalAmount){
+        newBill.totalAmount = totalAmount
       }
 
       //Check weather the post with requested id is preaent or not
@@ -116,5 +122,6 @@ router.post("/allbills", fetchuser, async (req, res) => {
       res.status(500).send({ err: "Oops Something went wrong!", success: false });
     }
   });
+
 
 module.exports = router;
