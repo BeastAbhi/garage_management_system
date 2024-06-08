@@ -16,6 +16,10 @@ const StockSchema = new mongoose.Schema({
     minQuantity:{
         type: Number,
         required: true
+    },
+    lastAdded:{
+        type: Date,
+        required: true
     }
 })
 

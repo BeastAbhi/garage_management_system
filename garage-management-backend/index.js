@@ -17,6 +17,8 @@ app.use('/api/carchecks', require('./routes/carChecks'))
 
 app.use('/api/bill', require('./routes/bill'))
 
+app.use('/api/stock', require('./routes/stock'))
+
 
 
 
