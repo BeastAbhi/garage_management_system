@@ -49,6 +49,7 @@ router.post(
       images,
       technician,
       advisory,
+      note
     } = req.body;
     const { frontImageURI, rightImageURI, backImageURI, leftImageURI } = images;
     const errors = validationResult(req);
@@ -70,6 +71,7 @@ router.post(
         },
         technician,
         advisory,
+        note
       });
       const saveCar = await carChecks.save();
       res.send({ saveCar, success: true });
