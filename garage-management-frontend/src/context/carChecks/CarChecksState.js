@@ -1,6 +1,5 @@
 import CarChecksContext from "./carChecksContext";
-
-import React from "react";
+import React, { useState } from "react";
 
 const CarChecksState = (props) => {
   const host = process.env.REACT_APP_HOST_LINK;
@@ -86,7 +85,7 @@ const CarChecksState = (props) => {
 
   return (
     <CarChecksContext.Provider value={{carChecks, getCarChecks, addCarChecks, deleteCarCheck, getAllCarChecks }}>
-      {props.childern}
+      {props.children}
     </CarChecksContext.Provider>
   );
 };
