@@ -2,7 +2,7 @@ import CarContext from "./carContext";
 import React, { useState } from "react";
 
 const CarState = (props) => {
-  const host = process.env.REACT_APP_HOST_LINK;
+  const host = import.meta.env.REACT_APP_HOST_LINK;
   const carsInitial = [];
   const [cars, setCars] = useState(carsInitial);
   const authToken = localStorage.getItem("token");

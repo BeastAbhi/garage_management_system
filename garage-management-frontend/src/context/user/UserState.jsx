@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import UserContext from './userContext'
 
 function UserState(props) {
-  const host = process.env.REACT_APP_HOST_LINK;
+  const host = import.meta.env.REACT_APP_HOST_LINK;
   const [user, setUser] = useState({})
   const authToken = localStorage.getItem("token");
 
