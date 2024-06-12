@@ -21,13 +21,14 @@ router.post(
       success = false;
       return res.status(400).json({ success, errors: errors.array() });
     }
+
     try {
       const stock = new Stock({
         itemName,
         quantity,
         minQuantity,
         price,
-        lastAdded: Date.now,
+        lastAdded: Date.now()
       });
       const saveStock = await stock.save();
       res.send({ saveStock, success: true });

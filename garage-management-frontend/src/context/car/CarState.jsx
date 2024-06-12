@@ -104,7 +104,7 @@ const CarState = (props) => {
 
     //Logic to Delete an car
     let newCar = cars.filter((car) => {
-      return cars._id !== id;
+      return car._id !== id;
     });
     setCars(newCar);
   };
@@ -117,6 +117,9 @@ const CarState = (props) => {
         "Content-Type": "application/json",
         "auth-token": authToken,
       },
+      body: JSON.stringify({
+        carNumber
+      })
     });
     return response.json()
   };
