@@ -1,6 +1,7 @@
 import BillState from "./context/bill/BillState";
 import CarState from "./context/car/CarState";
 import CarChecksState from "./context/carChecks/CarChecksState";
+import StockState from "./context/stocks/StockState";
 import UserState from "./context/user/UserState";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
       <CarState>
         <CarChecksState>
           <BillState>
-            <h1 className="text-red-500">hihihihihih</h1>
+            <StockState>
+              <h1 className="text-red-500">hihihihihih</h1>
+            </StockState>
           </BillState>
         </CarChecksState>
       </CarState>
