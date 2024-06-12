@@ -11,7 +11,7 @@ function App() {
         <CarChecksState>
           <BillState>
             <StockState>
-              <h1 className="text-red-500">hihihihihih</h1>
+              <h1 className="text-red-500">I am Akash</h1>
             </StockState>
           </BillState>
         </CarChecksState>
