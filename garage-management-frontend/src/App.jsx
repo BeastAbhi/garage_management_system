@@ -6,6 +6,7 @@ import LoaderState from "./context/loader/LoaderState";
 import StockState from "./context/stocks/StockState";
 import UserState from "./context/user/UserState";
 import Toaster from "./components/ui/Toaster";
+import Loader from "./components/Loader";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
           <BillState>
             <StockState>
               <LoaderState>
+                <Loader />
                 <h1 className="text-red-500">Hi this is abhishek</h1>
-                <TestComponent></TestComponent>
+                <TestComponent />
                 <Toaster />
               </LoaderState>
             </StockState>
