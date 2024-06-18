@@ -7,6 +7,8 @@ import StockState from "./context/stocks/StockState";
 import UserState from "./context/user/UserState";
 import Toaster from "./components/ui/Toaster";
 import Loader from "./components/Loader";
+import Sidebar from "./components/Sidebar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -17,8 +19,16 @@ function App() {
             <StockState>
               <LoaderState>
                 <Loader />
-                <h1 className="text-red-500">Hi this is abhishek</h1>
-                <TestComponent />
+                
+                <Router>
+                  <div className="flex flex-row scroll-m-0">
+                    <Sidebar />
+                      <Routes>
+                        <Route exact path="/" element={<TestComponent />}></Route>
+                      </Routes>
+                  </div>
+                </Router>
+
                 <Toaster />
               </LoaderState>
             </StockState>

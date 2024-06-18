@@ -15,7 +15,7 @@ const TestComponent = () => {
         setTimeout(() => {
           setLoader(false)
         }, 3000);
-      }} >hihhih</button>
+      }} >hihhih </button>
     </div>
   )
 }

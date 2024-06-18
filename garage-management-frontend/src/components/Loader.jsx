@@ -9,9 +9,9 @@ const Loader = () => {
     <div className={`h-svh w-svw ${loader?"flex":"hidden"} justify-center items-center absolute backdrop-blur-sm`}>
       <div className="loader">
         <svg
-          xml:space="preserve"
+          xmlSpace="preserve"
           viewBox="0 0 254.532 254.532"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
           xmlns="http://www.w3.org/2000/svg"
           id="Capa_1"
           version="1.1"

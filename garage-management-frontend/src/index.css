@@ -77,3 +77,22 @@
 body{
   transition: all .25s;
 }
+
+.sidebar {
+  @apply sticky left-0 top-0 flex h-screen w-fit flex-col  justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
+}
+
+.sidebar-logo {
+  @apply 2xl:text-2xl font-sans text-[26px] font-bold text-gray-900 max-xl:hidden;
+}
+
+.sidebar-link {
+  @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
+}
+
+.sidebar-label {
+  @apply text-base font-bold text-gray-700 max-xl:hidden ;
+}
+.bg-nav-gradient {
+  background-image: linear-gradient(90deg, #0179FE 0%, #4893FF 100%);
+}
