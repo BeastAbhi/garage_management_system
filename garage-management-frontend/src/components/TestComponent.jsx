@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import loaderContext from '@/context/loader/loaderContext'
 
-
-
 const TestComponent = () => {
     const loaderCon  = useContext(loaderContext)
     const { showToast, setLoader } = loaderCon

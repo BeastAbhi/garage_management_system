@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BillContext from "./billContext";
 
 const BillState = (props) => {
-  const host = import.meta.env.REACT_APP_HOST_LINK;
+  const host = import.meta.env.VITE_APP_HOST_LINK;
   const billInitial = [];
   const [bills, setBills] = useState(billInitial);
   const authToken = localStorage.getItem("token");

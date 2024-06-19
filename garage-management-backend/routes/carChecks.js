@@ -11,6 +11,11 @@ router.post(
   fetchuser,
   [body("carNumber", "Car number is Invalid").isLength({ min: 10, max: 10 })],
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      success = false;
+      return res.status(400).json({ success, error: errors.array() });
+    }
     try {
       //This will fetch all the posts
       const carChaecks = await CarsChecks.find({
@@ -18,7 +23,6 @@ router.post(
       });
       res.send({ carChaecks, success: true });
     } catch (error) {
-      console.error(error.message);
       res
         .status(500)
         .send({ err: "Oops Something went wrong!", success: false });
@@ -55,7 +59,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
     try {
       const carChecks = new CarsChecks({
@@ -76,7 +80,6 @@ router.post(
       const saveCar = await carChecks.save();
       res.send({ saveCar, success: true });
     } catch (error) {
-      console.log(error.message);
       res
         .status(500)
         .send({ err: "Oops some thing went wrong!!", success: false });
@@ -96,7 +99,6 @@ router.delete("/deletecarcheck/:id", fetchuser, async (req, res) => {
     carCheck = await CarChecks.findByIdAndDelete(req.params.id);
     res.send({ msg: "Car Check has been deleted", success: true });
   } catch (error) {
-    console.error(error.message);
     res
       .status(500)
       .send({ err: "Oops some thing went wrong!!", success: false });
@@ -110,7 +112,6 @@ router.post("/allcarchecks", fetchuser, async (req, res) => {
     const carChaecks = await CarsChecks.find();
     res.send({ carChaecks, success: true });
   } catch (error) {
-    console.error(error.message);
     res.status(500).send({ err: "Oops Something went wrong!", success: false });
   }
 });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import StockContext from "./stockContext";
 
 const StockState = (props) => {
-  const host = import.meta.env.REACT_APP_HOST_LINK;
+  const host = import.meta.env.VITE_APP_HOST_LINK;
   const stocksInitial = [];
   const [stocks, setStocks] = useState(stocksInitial);
   const authToken = localStorage.getItem("token");

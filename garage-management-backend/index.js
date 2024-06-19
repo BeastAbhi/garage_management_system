@@ -1,10 +1,11 @@
 const connectToMongo = require('./db')
 const express = require('express')
 connectToMongo();
-const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors');
 const port = 5000
 
+app.use(cors());
 app.use(express.json()); // To handle JSON-encoded data
 
 //Available Routes

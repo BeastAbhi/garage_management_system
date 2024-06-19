@@ -6,7 +6,7 @@ const Loader = () => {
   const loadCon = useContext(loaderContext);
   const { loader } = loadCon;
   return (
-    <div className={`h-svh w-svw ${loader?"flex":"hidden"} justify-center items-center absolute backdrop-blur-sm`}>
+    <div className={`h-svh w-svw ${loader?"flex":"hidden"} justify-center items-center absolute backdrop-blur-sm z-50`}>
       <div className="loader">
         <svg
           xmlSpace="preserve"

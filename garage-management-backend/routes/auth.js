@@ -26,7 +26,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
     try {
       //This will check wheather user already exists with this phone number
@@ -35,7 +35,7 @@ router.post(
         success = false;
         return res.status(400).json({
           success,
-          error: "Sorry a user with this User Name already exists",
+          err: "Sorry a user with this User Name already exists",
         });
       }
 
@@ -64,7 +64,7 @@ router.post(
       res.json({ success, authtoken });
     } catch (error) {
       success = false;
-      res.status(500).send({ success, error: "Oops some thing went wrong!!" });
+      res.status(500).send({ success, err: "Oops some thing went wrong!!" });
     }
   }
 );
@@ -84,7 +84,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
     const { userName, password } = req.body;
     try {
@@ -94,7 +94,7 @@ router.post(
         success = false;
         return res.status(400).json({
           success,
-          error: "Please Try to login with correct credentials!",
+          err: "Please Try to login with correct credentials!",
         });
       }
       const passCompair = await bcrypt.compare(password, user.password);
@@ -102,7 +102,7 @@ router.post(
         success = false;
         return res.status(400).json({
           success,
-          error: "Please Try to login with correct credentials!",
+          err: "Please Try to login with correct credentials!",
         });
       }
 
@@ -119,7 +119,6 @@ router.post(
       res.json({ success, authtoken });
     } catch (error) {
       success = false;
-      console.error(error.message);
       res.status(500).send(success, "Oops some thing went wrong!!");
     }
   }
@@ -133,7 +132,6 @@ router.post("/getuser", fetchuser, async (req, res) => {
     const user = await User.findById(userId).select("-password");
     res.send({user, success:true});
   } catch (error) {
-    console.error(error.message);
     res.status(500).send("Oops some thing went wrong!!");
   }
 });
@@ -151,7 +149,7 @@ router.put(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
 
     try {
@@ -176,7 +174,6 @@ router.put(
       res.send({user, success:true});
     } catch (error) {
       success = false;
-      console.error(error.message);
       res.status(500).send(success, "Oops some thing went wrong!!");
     }
   }
@@ -189,7 +186,7 @@ router.delete("/deleteuser", fetchuser, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     success = false;
-    return res.status(400).json({ success, errors: errors.array() });
+    return res.status(400).json({ success, error: errors.array() });
   }
 
   try {
@@ -197,15 +194,14 @@ router.delete("/deleteuser", fetchuser, async (req, res) => {
     let user = await User.findById(userId);
     if (!user) {
       success = false;
-      return res.status(400).json({ success, error: "User not Found!!" });
+      return res.status(400).json({ success, err: "User not Found!!" });
     }
 
     //Delete the user
     user = await User.findByIdAndDelete(req.user.id);
-    res.send({meg:"User has been deleted", success:true});
+    res.send({msg:"User has been deleted", success:true});
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Oops some thing went wrong!!");
+    res.status(500).send({err:"Oops some thing went wrong!!",success:false});
   }
 });
 
@@ -221,7 +217,7 @@ router.put(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
 
     try {
@@ -234,14 +230,14 @@ router.put(
         success = false;
         return res
           .status(400)
-          .json({ success, error: "Please Try to enter correct password!" });
+          .json({ success, err: "Please Try to enter correct password!" });
       }
       const passCompair = await bcrypt.compare(oldPassword, user.password);
       if (!passCompair) {
         success = false;
         return res.status(400).json({
           success,
-          error: "Please Enter correct Password!",
+          err: "Please Enter correct Password!",
         });
       }
 
@@ -258,10 +254,9 @@ router.put(
       res.json({ success, updatedUser });
     } catch (error) {
       success = false;
-      console.error(error.message);
       return res
         .status(500)
-        .send({ success, error: "Oops some thing went wrong!!" });
+        .send({ success, err: "Oops some thing went wrong!!" });
     }
   }
 );

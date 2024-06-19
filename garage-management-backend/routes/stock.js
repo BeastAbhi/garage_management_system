@@ -19,7 +19,7 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       success = false;
-      return res.status(400).json({ success, errors: errors.array() });
+      return res.status(400).json({ success, error: errors.array() });
     }
 
     try {
@@ -33,7 +33,6 @@ router.post(
       const saveStock = await stock.save();
       res.send({ saveStock, success: true });
     } catch (error) {
-      console.log(error.message);
       res
         .status(500)
         .send({ err: "Oops some thing went wrong!!", success: false });
@@ -76,7 +75,6 @@ router.put("/updatestock/:id", fetchuser, async (req, res) => {
     );
     res.send({ stock, success: true });
   } catch (error) {
-    console.error(error.message);
     res
       .status(500)
       .send({ err: "Oops some thing went wrong!!", success: false });
@@ -96,7 +94,6 @@ router.delete("/deletestock/:id", fetchuser, async (req, res) => {
     stock = await Stock.findByIdAndDelete(req.params.id);
     res.send({ msg: "Item has been deleted", success: true });
   } catch (error) {
-    console.error(error.message);
     res
       .status(500)
       .send({ err: "Oops some thing went wrong!!", success: false });
@@ -110,7 +107,6 @@ router.post("/fetchstock", fetchuser, async (req, res) => {
     const stock = await Stock.find();
     res.send({ stock, success: true });
   } catch (error) {
-    console.error(error.message);
     res.status(500).send({ err: "Oops Something went wrong!", success: false });
   }
 });
@@ -142,8 +138,7 @@ router.put("/updatestockquantity/:id", fetchuser, async (req, res) => {
     );
 
     res.send({ stock, success: true });
-  } catch (error) {
-    console.error(error.message);
+  } catch (error) {;
     res.status(500).send({ err: "Oops Something went wrong!", success: false });
   }
 });

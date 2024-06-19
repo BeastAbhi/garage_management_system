@@ -8,11 +8,10 @@ const { body, validationResult } = require("express-validator");
 router.post("/fetchallcars", fetchuser, async (req, res) => {
   try {
     //This will fetch all the posts
-    const posts = await Posts.find();
-    res.send({ posts, success: true });
+    const cars = await Cars.find();
+    res.send({ cars, success: true });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send({ res: "Oops Something went wrong!", success: false });
+    res.status(500).send({ err: "Oops Something went wrong!", success: false });
   }
 });
 
@@ -33,6 +32,11 @@ router.post(
   async (req, res) => {
     const { carNumber, ownerName, ownerMobNumber, carModel, serviceStatus } =
       req.body;
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        success = false;
+        return res.status(400).json({ success, error: errors.array() });
+      }
     try {
       const car = new Cars({
         carNumber,
@@ -69,6 +73,11 @@ router.put(
   async (req, res) => {
     const { carNumber, ownerName, ownerMobNumber, carModel, serviceStatus } =
       req.body;
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        success = false;
+        return res.status(400).json({ success, error: errors.array() });
+      }
     try {
       const newCar = {
         carNumber,
@@ -103,8 +112,7 @@ router.delete("/deletecar/:id", fetchuser, async (req, res) => {
           return res.status(404).send({err:"Car not found", success: false})
         }
         car = await Cars.findByIdAndDelete(req.params.id)
-        console.log("..............")
-        res.send({meg: "Car deleted", success: true})
+        res.send({msg: "Car deleted", success: true})
   } catch (error) {
     res
       .status(500)
@@ -120,8 +128,7 @@ router.post("/getcar", fetchuser, async (req, res) => {
       const car = await Cars.find({carNumber: req.body.carNumber});
       res.send({car, success: true});
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Oops some thing went wrong!!");
+      res.status(500).send({err:"Oops some thing went wrong!!",success:false});
     }
   });
 module.exports = router;

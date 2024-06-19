@@ -2,7 +2,7 @@ import CarChecksContext from "./carChecksContext";
 import React, { useState } from "react";
 
 const CarChecksState = (props) => {
-  const host = import.meta.env.REACT_APP_HOST_LINK;
+  const host = import.meta.env.VITE_APP_HOST_LINK;
   const carChecksInitial = [];
   const [carChecks, setCarChecks] = useState(carChecksInitial);
   const authToken = localStorage.getItem("token");

@@ -10,6 +10,8 @@ import Loader from "./components/Loader";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MobileNav from "./components/MobileNav";
+import Login from "./components/authComponent/Login";
+import Signup from "./components/authComponent/Signup";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
                     <Sidebar />
                     <Routes>
                       <Route exact path="/" element={<TestComponent />}></Route>
+                      <Route exact path="/login" element={<Login />}></Route>
+                      <Route exact path="/signup" element={<Signup />}></Route>
                     </Routes>
                   </div>
                 </Router>
