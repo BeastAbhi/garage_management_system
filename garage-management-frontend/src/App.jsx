@@ -9,6 +9,7 @@ import Toaster from "./components/ui/Toaster";
 import Loader from "./components/Loader";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MobileNav from "./components/MobileNav";
 
 function App() {
   return (
@@ -19,13 +20,17 @@ function App() {
             <StockState>
               <LoaderState>
                 <Loader />
-                
+
                 <Router>
-                  <div className="flex flex-row scroll-m-0">
+                  <div className="mobilenav-layout">
+                    <p>MGM</p>
+                    <MobileNav />
+                  </div>
+                  <div className="flex flex-row no-scrollbar">
                     <Sidebar />
-                      <Routes>
-                        <Route exact path="/" element={<TestComponent />}></Route>
-                      </Routes>
+                    <Routes>
+                      <Route exact path="/" element={<TestComponent />}></Route>
+                    </Routes>
                   </div>
                 </Router>
 

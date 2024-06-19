@@ -1,14 +1,13 @@
-
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import homeIcon from "../assets/icons/home.svg"
+import homeIcon from "../assets/icons/home.svg";
 
 const Sidebar = () => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <section className="sidebar">
       <nav className="flex flex-col gap-4">
-      <Link href="/" className="mb-12 flex cursor-pointer items-center gap-2">
+        <Link href="/" className="mb-12 flex cursor-pointer items-center gap-2">
           {/* <Image
             src={"/icons/logo.svg"}
             width={34}
@@ -18,21 +17,45 @@ const Sidebar = () => {
           />{" "} */}
           <h1 className="sidebar-logo">MGM</h1>
         </Link>
-        <Link to={"/"} className={`sidebar-link ${location.pathname === '/' ? 'bg-nav-gradient':""}`}>
-        <div className="relative size-6">
-          <img src={homeIcon} className={`${location.pathname === '/' ? 'brightness-200 invert-0':""}`}/>
-        </div>
-        <div className={`sidebar-label ${location.pathname === '/' ? '!text-white':""}`}>
+        <Link
+          to={"/"}
+          className={`sidebar-link ${
+            location.pathname === "/" ? "bg-nav-gradient" : ""
+          }`}
+        >
+          <div className="relative size-6">
+            <img
+              src={homeIcon}
+              className={`${
+                location.pathname === "/" ? "brightness-200 invert-0" : ""
+              }`}
+            />
+          </div>
+          <div
+            className={`sidebar-label ${
+              location.pathname === "/" ? "!text-white" : ""
+            }`}
+          >
             Home
-        </div>
+          </div>
         </Link>
 
-        <Link to={"/dashbord"} className={`sidebar-link ${location.pathname === '/dashbord' ? 'bg-nav-gradient':""}`}>
-        <div className={`sidebar-label ${location.pathname === '/dashbord' ? '!text-white':""}`}>
+        <Link
+          to={"/dashboard"}
+          className={`sidebar-link ${
+            location.pathname === "/dashboard" ? "bg-nav-gradient" : ""
+          }`}
+        >
+          <div
+            className={`sidebar-label ${
+              location.pathname === "/dashboard" ? "!text-white" : ""
+            }`}
+          >
             Dashbord
-        </div>
+          </div>
         </Link>
       </nav>
+      <p className="text-black">User Details</p>
     </section>
   );
 };
