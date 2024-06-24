@@ -19,6 +19,7 @@ const CarState = (props) => {
     });
     const json = await response.json();
     setCars(json);
+    return json
   };
 
   // Add car

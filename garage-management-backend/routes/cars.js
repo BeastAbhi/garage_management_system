@@ -26,8 +26,8 @@ router.post(
       min: 10,
       max: 10,
     }),
-    body("carModel", "Car model should not be empty").isEmpty(),
-    body("serviceStatus", "Service status should not be empty").isEmpty(),
+    body("carModel", "Car model should not be empty").notEmpty(),
+    body("serviceStatus", "Service status should not be empty").notEmpty(),
   ],
   async (req, res) => {
     const { carNumber, ownerName, ownerMobNumber, carModel, serviceStatus } =
@@ -67,8 +67,8 @@ router.put(
       min: 10,
       max: 10,
     }),
-    body("carModel", "Car model should not be empty").isEmpty(),
-    body("serviceStatus", "Service status should not be empty").isEmpty(),
+    body("carModel", "Car model should not be empty").notEmpty(),
+    body("serviceStatus", "Service status should not be empty").notEmpty(),
   ],
   async (req, res) => {
     const { carNumber, ownerName, ownerMobNumber, carModel, serviceStatus } =

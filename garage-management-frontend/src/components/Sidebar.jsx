@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import homeIcon from "../assets/icons/home.svg";
+import carIcon from "../assets/icons/car.svg"
 
 const Sidebar = () => {
   const location = useLocation();
@@ -41,19 +42,29 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          to={"/dashboard"}
+          to={"/cars"}
           className={`sidebar-link ${
-            location.pathname === "/dashboard" ? "bg-nav-gradient" : ""
+            location.pathname === "/cars" ? "bg-nav-gradient" : ""
           }`}
         >
+          <div className="relative size-6">
+            <img
+              src={carIcon}
+              className={` h-full w-full ${
+                location.pathname === "/cars" ? "brightness-200 invert" : ""
+              }`}
+            />
+          </div>
           <div
             className={`sidebar-label ${
-              location.pathname === "/dashboard" ? "!text-white" : ""
+              location.pathname === "/cars" ? "!text-white" : ""
             }`}
           >
-            Dashbord
+            Cars
           </div>
         </Link>
+
+
       </nav>
       <p className="text-black">User Details</p>
     </section>

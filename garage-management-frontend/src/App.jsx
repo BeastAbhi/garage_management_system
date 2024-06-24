@@ -10,8 +10,9 @@ import Loader from "./components/Loader";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MobileNav from "./components/MobileNav";
-import Login from "./components/authComponent/Login";
-import Signup from "./components/authComponent/Signup";
+import Login from "./components/authComponents/Login";
+import Signup from "./components/authComponents/Signup";
+import Cars from "./components/carComponents/Cars";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                       <Route exact path="/" element={<TestComponent />}></Route>
                       <Route exact path="/login" element={<Login />}></Route>
                       <Route exact path="/signup" element={<Signup />}></Route>
+                      <Route exact path="/cars" element={<Cars />}></Route>
                     </Routes>
                   </div>
                 </Router>
