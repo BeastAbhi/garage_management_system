@@ -28,8 +28,9 @@ const CarState = (props) => {
     ownerName,
     ownerMobNumber,
     carModel,
-    serviceStatus
+    serviceStatus = false
   ) => {
+    carNumber = carNumber.toUpperCase()
     //API call
     const response = await fetch(`${host}/api/cars/addcar`, {
       method: "POST",
@@ -46,7 +47,8 @@ const CarState = (props) => {
       }),
     });
     const car = await response.json();
-    setCars(cars.contat(car));
+    setCars(cars.concat(car));
+    return(car)
   };
 
   //Update car
@@ -101,13 +103,12 @@ const CarState = (props) => {
       },
     });
 
-    response.json();
-
     //Logic to Delete an car
     let newCar = cars.filter((car) => {
       return car._id !== id;
     });
     setCars(newCar);
+    return response.json();
   };
 
   const getCar = async (carNumber) => {

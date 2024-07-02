@@ -19,14 +19,14 @@ const Login = () => {
   const setValue = (e) => {
     setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
   };
-  const handelSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true)
     const res = await login(loginDetails.userName, loginDetails.password)
     if(res.success){
       localStorage.setItem('token',res.authtoken)
       navigate('/')
-      showToast('Logged In','Logged in successfully')
+      showToast('Logged In','Logged in Successfully')
     }
     else{
       showToast('Error',res.err? res.err:res.error[0].msg,'destructive')
@@ -38,7 +38,7 @@ const Login = () => {
       <div className="min-w-96 p-10 justify-center shadow-2xl rounded-lg border-2 border-gray-50">
         <h1 className="font-sans text-4xl font-bold">Login</h1>
         <p className="font-sans text-sm font-thin mb-4">Login to Continue </p>
-        <form onSubmit={handelSubmit} className="flex flex-col gap-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <Label htmlFor="userName">User Name</Label>
           <Input
             type="text"

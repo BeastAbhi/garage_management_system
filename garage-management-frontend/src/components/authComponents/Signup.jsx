@@ -16,7 +16,7 @@ const Signup = () => {
     const setValue = (e) => {
         setSignUpDetails({ ...signUpDetails, [e.target.name]: e.target.value });
     };
-    const handelSubmit = async (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       setLoader(true)
       if(signUpDetails.password === signUpDetails.CPassword){
@@ -40,7 +40,7 @@ const Signup = () => {
       <div className="min-w-96 p-10 justify-center shadow-2xl rounded-lg border-2 border-gray-50">
         <h1 className="font-sans text-4xl font-bold">Sign Up</h1>
         <p className="font-sans text-sm font-thin mb-4">Sign Up to Continue </p>
-        <form onSubmit={handelSubmit} className="flex flex-col gap-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <Label htmlFor="userName">User Name</Label>
           <Input
             type="text"

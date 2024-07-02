@@ -3,6 +3,7 @@ import EditIcon from "@/assets/icons/EditIcon";
 import DeleteIcon from "@/assets/icons/DeleteIcon";
 import MoveIcon from "@/assets/icons/MoveIcon";
 import carContext from "@/context/car/carContext";
+import loaderContext from "@/context/loader/loaderContext";
 
 import {
   AlertDialog,
@@ -22,26 +23,43 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const CarItem = (props) => {
   const { car } = props;
   const carCon = useContext(carContext);
-  const { updateCar, deleteCar } = carCon;
+  const { deleteCar } = carCon;
+  const loaderCon = useContext(loaderContext);
+  const { showToast, setLoader } = loaderCon;
+  const navigate = useNavigate()
 
   const EditCar = (car) => {
     console.log(car);
   };
-  const DeleteCar = (car) => {
-    console.log(car);
+  const DeleteCar = async (car) => {
+    setLoader(true)
+    const res = await deleteCar(car._id)
+    if (!res.success) {
+      showToast("Error", res.err ? res.err : res.error[0].msg, "destructive");
+    }
+    else{
+      navigate("/cars");
+      showToast("Deleted", "Car Deleted Successfully");
+    }
+    setLoader(false)
   };
   const moveInGarage = (car) => {
     if (!car.serviceStatus) {
       console.log(car);
     }
   };
+  const displayCar = (car)=>{
+    navigate('/showcar', {state:{car:car}})
+  }
   return (
     <div className="flex flex-row justify-between items-center mt-2 p-2 border-2 border-gray-200 shadow-sm rounded-md">
-      <p>{car.carNumber}</p>
+      <Button variant="link" onClick={()=>{displayCar(car)}}>{car.carNumber}</Button>
       <p className="min-w-14 max-w-14">{car.carModel}</p>
       <p className="min-w-14 max-w-14 max-md:hidden">{car.ownerName}</p>
       <p className="max-md:hidden">{car.ownerMobNumber}</p>

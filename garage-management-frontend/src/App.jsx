@@ -14,6 +14,7 @@ import Login from "./components/authComponents/Login";
 import Signup from "./components/authComponents/Signup";
 import Cars from "./components/carComponents/Cars";
 import AddCarForm from "./components/carComponents/AddCarForm";
+import ActiveCarItems from "./components/carComponents/ActiveCarItems";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                       <Route exact path="/signup" element={<Signup />}></Route>
                       <Route exact path="/cars" element={<Cars />}></Route>
                       <Route exact path="/addcar" element={<AddCarForm />}></Route>
+                      <Route exact path="/showcar" element={<ActiveCarItems />}></Route>
                     </Routes>
                   </div>
                 </Router>
