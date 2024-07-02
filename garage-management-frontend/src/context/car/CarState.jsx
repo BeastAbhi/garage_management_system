@@ -18,7 +18,7 @@ const CarState = (props) => {
       },
     });
     const json = await response.json();
-    setCars(json);
+    setCars(json.cars);
     return json
   };
 

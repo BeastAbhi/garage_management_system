@@ -13,6 +13,7 @@ import MobileNav from "./components/MobileNav";
 import Login from "./components/authComponents/Login";
 import Signup from "./components/authComponents/Signup";
 import Cars from "./components/carComponents/Cars";
+import AddCarForm from "./components/carComponents/AddCarForm";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                       <Route exact path="/login" element={<Login />}></Route>
                       <Route exact path="/signup" element={<Signup />}></Route>
                       <Route exact path="/cars" element={<Cars />}></Route>
+                      <Route exact path="/addcar" element={<AddCarForm />}></Route>
                     </Routes>
                   </div>
                 </Router>

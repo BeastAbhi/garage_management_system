@@ -67,7 +67,7 @@ const MobileNav = () => {
                   <img
                     src={ carIcon }
                     className={`${
-                      location.pathname === "/cars" ? "brightness-200 invert" : ""
+                      location.pathname === "/cars" ? "brightness-200 invert-0" : ""
                     }`}
                   />
                   <div

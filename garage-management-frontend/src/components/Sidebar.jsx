@@ -51,7 +51,7 @@ const Sidebar = () => {
             <img
               src={carIcon}
               className={` h-full w-full ${
-                location.pathname === "/cars" ? "brightness-200 invert" : ""
+                location.pathname === "/cars" ? "brightness-200 invert-0" : ""
               }`}
             />
           </div>
