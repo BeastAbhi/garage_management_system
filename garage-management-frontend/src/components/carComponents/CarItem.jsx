@@ -35,7 +35,7 @@ const CarItem = (props) => {
   const navigate = useNavigate()
 
   const EditCar = (car) => {
-    console.log(car);
+    navigate("/addcar", {state:{car:car,edit:true}})
   };
   const DeleteCar = async (car) => {
     setLoader(true)
@@ -58,7 +58,7 @@ const CarItem = (props) => {
     navigate('/showcar', {state:{car:car}})
   }
   return (
-    <div className="flex flex-row justify-between items-center mt-2 p-2 border-2 border-gray-200 shadow-sm rounded-md">
+    <div className="info-box-card">
       <Button variant="link" onClick={()=>{displayCar(car)}}>{car.carNumber}</Button>
       <p className="min-w-14 max-w-14">{car.carModel}</p>
       <p className="min-w-14 max-w-14 max-md:hidden">{car.ownerName}</p>

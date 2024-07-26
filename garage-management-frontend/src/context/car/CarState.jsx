@@ -58,8 +58,9 @@ const CarState = (props) => {
     ownerName,
     ownerMobNumber,
     carModel,
-    serviceStatus
+    serviceStatus = false
   ) => {
+    carNumber = carNumber.toUpperCase()
     //API call
     const response = await fetch(`${host}/api/cars/updatecar/${id}`, {
       method: "PUT",
@@ -75,7 +76,7 @@ const CarState = (props) => {
         serviceStatus,
       }),
     });
-    response.json();
+    const car = await response.json();
     //This line make a deep copy of the cars
     let newCar = JSON.parse(JSON.stringify(cars));
     for (let index = 0; index < newCar.length; index++) {
@@ -90,6 +91,7 @@ const CarState = (props) => {
       }
     }
     setCars(newCar);
+    return car
   };
 
   //Delete Car
@@ -112,6 +114,7 @@ const CarState = (props) => {
   };
 
   const getCar = async (carNumber) => {
+    carNumber = carNumber.toUpperCase()
     //API call
     const response = await fetch(`${host}/api/cars/getcar`, {
       method: "POST",
@@ -123,7 +126,9 @@ const CarState = (props) => {
         carNumber
       })
     });
-    return response.json()
+    const json = await response.json();
+    setCars(json.car);
+    return json
   };
 
   return (

@@ -6,7 +6,7 @@ const ActiveCarItems = () => {
   const car = location.state.car;
   return (
     <div className="h-screen w-full p-3 bg-blue-50">
-      <div className="flex flex-row justify-between px-4 items-center bg-nav-gradient text-white border-2 border-gray-200 shadow-sm rounded-md">
+      <div className="title-box-card">
         <h1 className=" text-[40px]">Car Details</h1>
         <strong>{car.serviceStatus ? "In Service" : "Not In Service"}</strong>
       </div>
