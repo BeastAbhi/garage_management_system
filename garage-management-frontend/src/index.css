@@ -123,11 +123,11 @@ body{
     @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
   }
   .mobilenav-layout {
-    @apply flex h-16 items-center justify-between p-5 shadow-card sm:p-8 md:hidden;
+    @apply flex h-16 items-center justify-between sticky top-0 p-5 shadow-card sm:p-8 md:hidden bg-slate-50;
   }
 
   .title-box-card {
-    @apply px-4 flex flex-row justify-between items-center bg-nav-gradient text-white border-2 border-gray-200 shadow-sm rounded-md;
+    @apply px-4 flex flex-row justify-between gap-2 items-center bg-nav-gradient text-white border-2 border-gray-200 shadow-sm rounded-md;
   }
 
   .heading-box-card{

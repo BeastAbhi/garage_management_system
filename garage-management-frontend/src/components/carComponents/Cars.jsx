@@ -40,7 +40,7 @@ const Cars = () => {
   }
 
   return (
-    <div className="h-screen w-full p-3 bg-blue-50">
+    <div className="h-full w-full p-3 bg-blue-50">
       <div className="title-box-card">
         <h1 className=" text-[40px]">Cars</h1>
         <Input placeholder="🔍 Search a Car" className="max-w-40 text-black" onChange={handleSearch}></Input>
@@ -55,7 +55,7 @@ const Cars = () => {
         <h1 className="max-md:hidden">Owner Name</h1>
         <h1 className="max-md:hidden">Owner Number</h1>
         <h1>Service Status</h1>
-        <h1 className="max-md:hidden">Operations</h1>
+        <h1>Operations</h1>
       </div>
       <div className="flex flex-col-reverse">
         {cars.length === 0

@@ -59,7 +59,7 @@ const CarItem = (props) => {
   }
   return (
     <div className="info-box-card">
-      <Button variant="link" onClick={()=>{displayCar(car)}}>{car.carNumber}</Button>
+      <Button className="p-0" variant="link" onClick={()=>{displayCar(car)}}>{car.carNumber}</Button>
       <p className="min-w-14 max-w-14">{car.carModel}</p>
       <p className="min-w-14 max-w-14 max-md:hidden">{car.ownerName}</p>
       <p className="max-md:hidden">{car.ownerMobNumber}</p>
@@ -71,7 +71,7 @@ const CarItem = (props) => {
         {car.serviceStatus ? "In Service" : "Not In Service"}
       </p>
 
-      <div className="max-md:hidden flex flex-row gap-2">
+      <div className="flex flex-row gap-2">
         {/* below code is for delete button */}
         <AlertDialog>
           <AlertDialogTrigger>

@@ -51,7 +51,7 @@ router.put("/updatestock/:id", fetchuser, async (req, res) => {
     }
     if (quantity) {
       newStock.quantity = quantity;
-      newStock.lastAdded = Date.now;
+      newStock.lastAdded = Date.now();
     }
     if (minQuantity) {
       newStock.minQuantity = minQuantity;
@@ -113,7 +113,7 @@ router.post("/fetchstock", fetchuser, async (req, res) => {
 
 //Rout 5: update the quantity of the stock items: POST "/api/stock/updatestockquantity" Login require
 router.put("/updatestockquantity/:id", fetchuser, async (req, res) => {
-  const { oldQuantity, newQuantity, quantity } = req.body;
+  const { oldQuantity, newQuantity, quantity, addQuantity } = req.body;
   const newStock = {};
   try {
     let stock = await Stock.findById(req.params.id);
@@ -124,11 +124,15 @@ router.put("/updatestockquantity/:id", fetchuser, async (req, res) => {
         newStock.quantity = stock.quantity - quantity;
     }
     if (oldQuantity > newQuantity) {
-      newStock.quantity = stock.quantity + oldQuantity - newQuantity;
+      newStock.quantity =  oldQuantity - newQuantity + stock.quantity;
     }
     if (oldQuantity < newQuantity) {
-        newStock.quantity = stock.quantity - (newQuantity - oldQuantity);
+       let quan =  newQuantity - oldQuantity;
+        newStock.quantity = stock.quantity - quan
       }
+    if(addQuantity){
+      newStock.quantity = stock.quantity + addQuantity;
+    }
 
     //Find the stock to be updated
     stock = await Stock.findByIdAndUpdate(

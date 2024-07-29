@@ -18,7 +18,8 @@ const StockState = (props) => {
       },
     });
     const json = await response.json();
-    setStocks(json);
+    setStocks(json.stock);
+    return(json)
   };
 
   // Add Stock
@@ -38,7 +39,8 @@ const StockState = (props) => {
       }),
     });
     const stock = await response.json();
-    setStocks(stocks.contat(stock));
+    setStocks(stocks.concat(stock));
+    return(stock)
   };
 
   //Update Stock
@@ -57,7 +59,7 @@ const StockState = (props) => {
         price,
       }),
     });
-    response.json();
+    let json = response.json();
     //This line make a deep copy of the stock
     let newStock = JSON.parse(JSON.stringify(stocks));
     for (let index = 0; index < newStock.length; index++) {
@@ -71,6 +73,7 @@ const StockState = (props) => {
       }
     }
     setStocks(newStock);
+    return(json)
   };
 
   //Delete Stock
@@ -84,13 +87,14 @@ const StockState = (props) => {
       },
     });
 
-    response.json();
+    let json = response.json();
 
     //Logic to Delete an stock
     let newStock = stocks.filter((stock) => {
       return stock._id !== id;
     });
     setStocks(newStock);
+    return(json)
   };
 
   //Update Stock Quantity
@@ -110,7 +114,7 @@ const StockState = (props) => {
         }),
       }
     );
-    response.json();
+    let json = response.json();
     //This line make a deep copy of the stock
     let newStockQuantity = JSON.parse(JSON.stringify(stocks));
     for (let index = 0; index < newStockQuantity.length; index++) {
@@ -121,11 +125,42 @@ const StockState = (props) => {
       }
     }
     setStocks(newStockQuantity);
+    return(json)
+  };
+
+  //Update Stock Quantity
+  const addStockQuantity = async (id, addQuantity) => {
+    //API call
+    const response = await fetch(
+      `${host}/api/stock/updatestockquantity/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": authToken,
+        },
+        body: JSON.stringify({
+          addQuantity
+        }),
+      }
+    );
+    let json = response.json();
+    //This line make a deep copy of the stock
+    let newStockQuantity = JSON.parse(JSON.stringify(stocks));
+    for (let index = 0; index < newStockQuantity.length; index++) {
+      const element = newStockQuantity[index];
+      if (element._id === id) {
+        newStockQuantity[index].quantity = element.quantity + addQuantity;
+        break;
+      }
+    }
+    setStocks(newStockQuantity);
+    return(json)
   };
 
   return (
     <StockContext.Provider
-      value={{ stocks, getAllStocks, addStock, updateStock, deleteStock, updateStockQuantity }}
+      value={{ stocks, getAllStocks, addStock, updateStock, deleteStock, updateStockQuantity, addStockQuantity }}
     >
       {props.children}
     </StockContext.Provider>

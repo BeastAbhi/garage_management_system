@@ -15,6 +15,8 @@ import Signup from "./components/authComponents/Signup";
 import Cars from "./components/carComponents/Cars";
 import AddCarForm from "./components/carComponents/AddCarForm";
 import ActiveCarItems from "./components/carComponents/ActiveCarItems";
+import Stock from "./components/inventoryComponents/Stock";
+import AddStockForm from "./components/inventoryComponents/AddStockForm";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
                       <Route exact path="/cars" element={<Cars />}></Route>
                       <Route exact path="/addcar" element={<AddCarForm />}></Route>
                       <Route exact path="/showcar" element={<ActiveCarItems />}></Route>
+                      <Route exact path="/stock" element={<Stock />}></Route>
+                      <Route exact path="/addstock" element={<AddStockForm />}></Route>
                     </Routes>
                   </div>
                 </Router>

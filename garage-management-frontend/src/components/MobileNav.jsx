@@ -9,7 +9,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import hamburger from "../assets/icons/hamburger.svg";
 import homeIcon from "../assets/icons/home.svg";
-import carIcon from "../assets/icons/car.svg"
+import carIcon from "../assets/icons/car.svg";
+import inventoryIcon from "../assets/icons/inventoryIcon.svg";
 
 
 const MobileNav = () => {
@@ -76,6 +77,27 @@ const MobileNav = () => {
                     }`}
                   >
                     Cars
+                  </div>
+                </Link>
+
+                <Link
+                  to={"/stock"}
+                  className={`mobilenav-sheet_close w-full ${
+                    location.pathname === "/stock" ? "bg-nav-gradient" : ""
+                  }`}
+                >
+                  <img
+                    src={ inventoryIcon }
+                    className={`${
+                      location.pathname === "/stock" ? "brightness-200 invert-0" : ""
+                    }`}
+                  />
+                  <div
+                    className={`text-16 font-semibold text-gray-700 ${
+                      location.pathname === "/stock" ? "!text-white" : ""
+                    }`}
+                  >
+                    Inventory
                   </div>
                 </Link>
 
