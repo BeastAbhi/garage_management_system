@@ -31,7 +31,7 @@ const Stock = () => {
   };
 
   return (
-    <div className="h-screen w-full p-3 bg-blue-50">
+    <div className="h-full w-full p-3 bg-blue-50">
       <div className="title-box-card">
         <h1 className=" text-[40px]">Inventory</h1>
         <Button variant="secondary" onClick={addStock}>

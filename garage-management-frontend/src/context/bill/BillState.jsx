@@ -18,7 +18,7 @@ const BillState = (props) => {
       },
     });
     const json = await response.json();
-    setBills(json);
+    setBills(json.bills);
   };
 
   // Add bill
@@ -61,49 +61,77 @@ const BillState = (props) => {
       const element = newBill[index];
       if (element._id === id) {
         newBill[index].items = items;
+
         break;
       }
     }
     setBills(newBill);
   };
 
-    //Delete Bill
-    const deleteBill = async (id) => {
-      //Api Call
-      const response = await fetch(`${host}/api/bill/updatebill/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": authToken,
-        },
-      });
-  
-      response.json();
-  
-      //Logic to Delete an car
-      let newBill = bills.filter((bill) => {
-        return bill._id !== id;
-      });
-      setBills(newBill);
-    };
+  //Delete Bill
+  const deleteBill = async (id) => {
+    //Api Call
+    const response = await fetch(`${host}/api/bill/deletebill/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": authToken,
+      },
+    });
 
-    const getBill = async (carNumber) => {
-      //API call
-      const response = await fetch(`${host}/api/bill/fetchbills`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": authToken,
-        },
-        body: JSON.stringify({
-          carNumber
-        })
-      });
-      return response.json()
-    };
+    //Logic to Delete an car
+    let newBill = bills.filter((bill) => {
+      return bill._id !== id;
+    });
+    setBills(newBill);
+    return response.json();
+  };
+
+  const getBill = async (carNumber) => {
+    //API call
+    const response = await fetch(`${host}/api/bill/fetchbills`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": authToken,
+      },
+      body: JSON.stringify({
+        carNumber,
+      }),
+    });
+    return response.json();
+  };
+
+  //Update Payment
+  const updatePay = async (id, isPaid) => {
+    //API call
+    const response = await fetch(`${host}/api/bill/updatebill/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": authToken,
+      },
+      body: JSON.stringify({
+        isPaid,
+      }),
+    });
+    response.json();
+    //This line make a deep copy of the bills
+    let newBill = JSON.parse(JSON.stringify(bills));
+    for (let index = 0; index < newBill.length; index++) {
+      const element = newBill[index];
+      if (element._id === id) {
+        newBill[index].isPaid = true;
+        break;
+      }
+    }
+    setBills(newBill);
+  };
 
   return (
-    <BillContext.Provider value={{ bills, getAllBills, addBill, updateBill, deleteBill, getBill }}>
+    <BillContext.Provider
+      value={{ bills, getAllBills, addBill, updateBill, deleteBill, getBill, updatePay }}
+    >
       {props.children}
     </BillContext.Provider>
   );

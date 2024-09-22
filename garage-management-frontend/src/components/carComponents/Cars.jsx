@@ -35,7 +35,6 @@ const Cars = () => {
     e.preventDefault()
     if(e.target.value.length >= 10){
       const res = await getCar(e.target.value)
-      console.log(res)
     }
   }
 

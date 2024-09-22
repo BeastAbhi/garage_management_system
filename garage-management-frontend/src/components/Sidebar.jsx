@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import homeIcon from "../assets/icons/home.svg";
-import carIcon from "../assets/icons/car.svg"
-import inventoryIcon from "../assets/icons/inventoryIcon.svg"
+import carIcon from "../assets/icons/car.svg";
+import inventoryIcon from "../assets/icons/inventoryIcon.svg";
+import billIcon from "../assets/icons/billicon.svg";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -66,6 +67,29 @@ const Sidebar = () => {
         </Link>
 
         <Link
+          to={"/bills"}
+          className={`sidebar-link ${
+            location.pathname === "/bills" ? "bg-nav-gradient" : ""
+          }`}
+        >
+          <div className="relative size-6">
+            <img
+              src={billIcon}
+              className={` h-full w-full ${
+                location.pathname === "/bills" ? "brightness-200 invert-0" : ""
+              }`}
+            />
+          </div>
+          <div
+            className={`sidebar-label ${
+              location.pathname === "/bills" ? "!text-white" : ""
+            }`}
+          >
+            Bills
+          </div>
+        </Link>
+
+        <Link
           to={"/stock"}
           className={`sidebar-link ${
             location.pathname === "/stock" ? "bg-nav-gradient" : ""
@@ -87,8 +111,6 @@ const Sidebar = () => {
             Inventory
           </div>
         </Link>
-
-
       </nav>
       <p className="text-black">User Details</p>
     </section>

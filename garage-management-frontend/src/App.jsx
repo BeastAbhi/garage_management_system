@@ -17,6 +17,8 @@ import AddCarForm from "./components/carComponents/AddCarForm";
 import ActiveCarItems from "./components/carComponents/ActiveCarItems";
 import Stock from "./components/inventoryComponents/Stock";
 import AddStockForm from "./components/inventoryComponents/AddStockForm";
+import Bills from "./components/billComponents/Bills";
+import AddBillForm from "./components/billComponents/AddBillForm";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
                       <Route exact path="/showcar" element={<ActiveCarItems />}></Route>
                       <Route exact path="/stock" element={<Stock />}></Route>
                       <Route exact path="/addstock" element={<AddStockForm />}></Route>
+                      <Route exact path="/bills" element={<Bills />}></Route>
+                      <Route exact path="/newbill" element={<AddBillForm />}></Route>
                     </Routes>
                   </div>
                 </Router>

@@ -11,7 +11,7 @@ import hamburger from "../assets/icons/hamburger.svg";
 import homeIcon from "../assets/icons/home.svg";
 import carIcon from "../assets/icons/car.svg";
 import inventoryIcon from "../assets/icons/inventoryIcon.svg";
-
+import billIcon from "../assets/icons/billicon.svg";
 
 const MobileNav = () => {
   const location = useLocation();
@@ -66,9 +66,11 @@ const MobileNav = () => {
                   }`}
                 >
                   <img
-                    src={ carIcon }
+                    src={carIcon}
                     className={`${
-                      location.pathname === "/cars" ? "brightness-200 invert-0" : ""
+                      location.pathname === "/cars"
+                        ? "brightness-200 invert-0"
+                        : ""
                     }`}
                   />
                   <div
@@ -81,15 +83,40 @@ const MobileNav = () => {
                 </Link>
 
                 <Link
+                  to={"/bills"}
+                  className={`mobilenav-sheet_close w-full ${
+                    location.pathname === "/bills" ? "bg-nav-gradient" : ""
+                  }`}
+                >
+                  <img
+                    src={billIcon}
+                    className={`${
+                      location.pathname === "/bills"
+                        ? "brightness-200 invert-0 "
+                        : ""
+                    }`}
+                  />
+                  <div
+                    className={`text-16 font-semibold text-gray-700 ${
+                      location.pathname === "/bills" ? "!text-white" : ""
+                    }`}
+                  >
+                    Bills
+                  </div>
+                </Link>
+
+                <Link
                   to={"/stock"}
                   className={`mobilenav-sheet_close w-full ${
                     location.pathname === "/stock" ? "bg-nav-gradient" : ""
                   }`}
                 >
                   <img
-                    src={ inventoryIcon }
+                    src={inventoryIcon}
                     className={`${
-                      location.pathname === "/stock" ? "brightness-200 invert-0" : ""
+                      location.pathname === "/stock"
+                        ? "brightness-200 invert-0"
+                        : ""
                     }`}
                   />
                   <div
@@ -100,7 +127,6 @@ const MobileNav = () => {
                     Inventory
                   </div>
                 </Link>
-
               </div>
             </SheetClose>
             <p className="text-black">User Details</p>
