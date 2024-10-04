@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import billContext from "@/context/bill/billContext";
 import loaderContext from "@/context/loader/loaderContext";
+import stockContext from "@/context/stocks/stockContext";
 
 import {
   Select,
@@ -27,6 +28,8 @@ const AddBillForm = () => {
     isPaid: false,
   });
   const location = useLocation();
+  const stockCon = useContext(stockContext);
+  const { stocks, getAllStocks } = stockCon;
 
   const setValue = (e) => {
     setBill({ ...bill, [e.target.name]: e.target.value });
@@ -70,7 +73,8 @@ const AddBillForm = () => {
     const fetchData = async () => {
       try {
         setLoader(true);
-        if (location.state.bill) {
+        await getAllStocks();
+        if (location.state.edit) {
           setBill(location.state.bill);
         }
         setLoader(false);
@@ -89,50 +93,64 @@ const AddBillForm = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-2 grid-flow-row gap-4 p-10 mt-4 border-2 border-gray-200 shadow-sm rounded-md"
+        className="flex flex-col gap-4 p-10 mt-4 border-2 border-gray-200 shadow-sm rounded-md"
       >
-        <div>
-          <Label htmlFor="carNumber">Car Number</Label>
-          <Input
-            type="text"
-            id="carNumber"
-            name="carNumber"
-            placeholder="Car Number"
-            className="max-w-prose"
-            value={bill.carNumber}
-            onChange={setValue}
-          />
-        </div>
-        <div>
-          <Label htmlFor="ownerName">Owner Name</Label>
-          <Input
-            type="text"
-            id="ownerName"
-            name="ownerName"
-            placeholder="Owner Name"
-            className="max-w-prose"
-            value={bill.items}
-            onChange={setValue}
-          />
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Part Name" />
-            </SelectTrigger>
-            <SelectContent>
-                {bill.map(()=>{
-                    return(
-                        <SelectItem value="light">Light</SelectItem>
-                    )
+        <div className="grid grid-cols-2 grid-flow-row gap-4">
+          <div>
+            <Label htmlFor="carNumber">Car Number</Label>
+            <Input
+              type="text"
+              id="carNumber"
+              name="carNumber"
+              placeholder="Car Number"
+              className="max-w-prose"
+              value={bill.carNumber}
+              onChange={setValue}
+            />
+          </div>
+          <div>
+            <Label htmlFor="carNumber">Car Number</Label>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Part Name" />
+              </SelectTrigger>
+              <SelectContent>
+                {stocks.map((stock) => {
+                  return (
+                    <SelectItem value={stock.itemName} key={stock._id}>
+                      {stock.itemName}
+                    </SelectItem>
+                  );
                 })}
-            </SelectContent>
-          </Select>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div>
+        <div className=" p-2 mt-2 mb-2 heading-box-card">
+          <h1>Name</h1>
+          <h1>Quantity</h1>
+          <h1>Price</h1>
+          <h1>Operation</h1>
+        </div>
+          {bill.items.map((item)=>{
+            return(
+              <div className="info-box-card" key={item._id}>
+                <p>{item.itemName}</p>
+                <p>{item.quantity}</p>
+                <p>{item.price}</p>
+              </div>
+            )
+          })}
         </div>
 
-        <div>Total: {bill.totalAmount}</div>
+        <div className="grid grid-cols-2 grid-flow-row gap-4">
+          <div><strong>Total:</strong> {bill.totalAmount}</div>
 
-        <Button type="submit" className="mt-6 max-w-24 bg-nav-gradient">
-          {location.state.edit ? "Update Car" : "Add Car"}
-        </Button>
+          <Button type="submit" className="max-w-24 bg-nav-gradient">
+            {location.state.edit ? "Update Bill" : "Add Bill"}
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -35,7 +35,6 @@ const AddStockForm = () => {
         stock.minQuantity,
         stock.price
       );
-      console.log(res)
       if (!res.success) {
         showToast("Error", res.err ? res.err : res.error[0].msg, "destructive");
       } else {
