@@ -42,7 +42,7 @@ const BillState = (props) => {
   };
 
   //Update bill
-  const updateBill = async (items, id) => {
+  const updateBill = async (items,totalAmount, id) => {
     //API call
     const response = await fetch(`${host}/api/bill/updatebill/${id}`, {
       method: "PUT",
@@ -52,20 +52,22 @@ const BillState = (props) => {
       },
       body: JSON.stringify({
         items,
+        totalAmount
       }),
     });
-    response.json();
     //This line make a deep copy of the bills
     let newBill = JSON.parse(JSON.stringify(bills));
     for (let index = 0; index < newBill.length; index++) {
       const element = newBill[index];
       if (element._id === id) {
         newBill[index].items = items;
+        newBill[index].totalAmount = totalAmount;
 
         break;
       }
     }
     setBills(newBill);
+    return(response.json())
   };
 
   //Delete Bill

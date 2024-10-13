@@ -40,11 +40,9 @@ const AddBillForm = () => {
     setLoader(true);
     if (location.state.bill) {
       const res = await updateBill(
-        location.state.bill._id,
-        bill.carNumber,
         bill.items,
         bill.totalAmount,
-        bill.isPaid
+        location.state.bill._id
       );
       if (!res.success) {
         showToast("Error", res.err ? res.err : res.error[0].msg, "destructive");
@@ -84,12 +82,74 @@ const AddBillForm = () => {
     };
     fetchData();
   }, []);
+
+  const [sellectedItem, setSellectedItem] = useState({});
+  const [Quantity, setQuantity] = useState(1)
+
+  const addItem = () => {
+    bill.items.push({
+      itemName: sellectedItem.itemName,
+      quantity: Quantity,
+      price: sellectedItem.price,
+      stockItemId: sellectedItem._id,
+    });
+    updatePrice();
+  };
+  const updatePrice = () => {
+    let price = 0;
+    for (let index = 0; index < bill.items.length; index++) {
+      price += bill.items[index].price * bill.items[index].quantity;
+    }
+    setBill({ ...bill, totalAmount: price });
+  };
+const updateQuantity = (e) =>{
+  //There is a problem TODO
+  setQuantity(e.target.value)
+  console.log(Quantity)
+  console.log(e.target.value)
+}
   return (
     <div className="h-screen w-full p-3 bg-blue-50">
       <div className="title-box-card">
         <h1 className=" text-[40px]">
           {location.state.edit ? "Update Bill" : "New Bill"}
         </h1>
+      </div>
+      <div>
+        <div className="flex flex-row gap-3 p-3 justify-center items-center " name="selectDiv">
+          <div>
+            <Label htmlFor="selectDiv">Select Part</Label>
+            <Select onValueChange={setSellectedItem}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Part Name" />
+              </SelectTrigger>
+              <SelectContent>
+                {stocks.map((stock) => {
+                  return (
+                    <SelectItem value={stock} key={stock._id}>
+                      {stock.itemName}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="quantity">Quantity</Label>
+            <Input
+              type="number"
+              id="quantity"
+              name="quantity"
+              placeholder="Quantity"
+              className="max-w-prose"
+              value={Quantity}
+              onChange={updateQuantity}
+            />
+          </div>
+          <Button className="max-w-24 bg-nav-gradient mt-6" onClick={addItem}>
+            Add
+          </Button>
+        </div>
       </div>
       <form
         onSubmit={handleSubmit}
@@ -108,44 +168,29 @@ const AddBillForm = () => {
               onChange={setValue}
             />
           </div>
-          <div>
-            <Label htmlFor="carNumber">Car Number</Label>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Part Name" />
-              </SelectTrigger>
-              <SelectContent>
-                {stocks.map((stock) => {
-                  return (
-                    <SelectItem value={stock.itemName} key={stock._id}>
-                      {stock.itemName}
-                    </SelectItem>
-                  );
-                })}
-              </SelectContent>
-            </Select>
-          </div>
         </div>
         <div>
-        <div className=" p-2 mt-2 mb-2 heading-box-card">
-          <h1>Name</h1>
-          <h1>Quantity</h1>
-          <h1>Price</h1>
-          <h1>Operation</h1>
-        </div>
-          {bill.items.map((item)=>{
-            return(
+          <div className=" p-2 mt-2 mb-2 heading-box-card">
+            <h1>Name</h1>
+            <h1>Quantity</h1>
+            <h1>Price</h1>
+            <h1>Operation</h1>
+          </div>
+          {bill.items.map((item) => {
+            return (
               <div className="info-box-card" key={item._id}>
                 <p>{item.itemName}</p>
                 <p>{item.quantity}</p>
                 <p>{item.price}</p>
               </div>
-            )
+            );
           })}
         </div>
 
         <div className="grid grid-cols-2 grid-flow-row gap-4">
-          <div><strong>Total:</strong> {bill.totalAmount}</div>
+          <div>
+            <strong>Total:</strong> {bill.totalAmount}
+          </div>
 
           <Button type="submit" className="max-w-24 bg-nav-gradient">
             {location.state.edit ? "Update Bill" : "Add Bill"}
