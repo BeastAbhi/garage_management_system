@@ -38,7 +38,8 @@ const BillState = (props) => {
       }),
     });
     const bill = await response.json();
-    setBills(bills.contat(bill));
+    setBills(bills.concat(bill));
+    return(bill)
   };
 
   //Update bill

@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import billContext from "@/context/bill/billContext";
 import loaderContext from "@/context/loader/loaderContext";
 import stockContext from "@/context/stocks/stockContext";
+import DeleteIcon from "@/assets/icons/DeleteIcon";
 
 import {
   Select,
@@ -84,7 +85,7 @@ const AddBillForm = () => {
   }, []);
 
   const [sellectedItem, setSellectedItem] = useState({});
-  const [Quantity, setQuantity] = useState(1)
+  const [Quantity, setQuantity] = useState(1);
 
   const addItem = () => {
     bill.items.push({
@@ -102,12 +103,17 @@ const AddBillForm = () => {
     }
     setBill({ ...bill, totalAmount: price });
   };
-const updateQuantity = (e) =>{
-  //There is a problem TODO
-  setQuantity(e.target.value)
-  console.log(Quantity)
-  console.log(e.target.value)
-}
+  const updateQuantity = (e) => {
+    e.preventDefault();
+    setQuantity(e.target.value);
+  };
+  useEffect(() => { updatePrice() }, [Quantity,bill.items]);
+
+  const removeItem = (id) => {
+    const res = bill.items.filter((item) => item.stockItemId !== id);
+    setBill({...bill, items:res})
+  };
+
   return (
     <div className="h-screen w-full p-3 bg-blue-50">
       <div className="title-box-card">
@@ -116,7 +122,10 @@ const updateQuantity = (e) =>{
         </h1>
       </div>
       <div>
-        <div className="flex flex-row gap-3 p-3 justify-center items-center " name="selectDiv">
+        <div
+          className="flex flex-row gap-3 p-3 justify-center items-center "
+          name="selectDiv"
+        >
           <div>
             <Label htmlFor="selectDiv">Select Part</Label>
             <Select onValueChange={setSellectedItem}>
@@ -174,7 +183,7 @@ const updateQuantity = (e) =>{
             <h1>Name</h1>
             <h1>Quantity</h1>
             <h1>Price</h1>
-            <h1>Operation</h1>
+            <h1>Remove</h1>
           </div>
           {bill.items.map((item) => {
             return (
@@ -182,6 +191,12 @@ const updateQuantity = (e) =>{
                 <p>{item.itemName}</p>
                 <p>{item.quantity}</p>
                 <p>{item.price}</p>
+                <DeleteIcon
+                  className="mr-3 fill-red-400  hover:cursor-pointer hover:fill-red-600"
+                  onClick={() => {
+                    removeItem(item.stockItemId);
+                  }}
+                />
               </div>
             );
           })}
